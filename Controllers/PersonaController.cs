@@ -13,7 +13,19 @@ namespace Backend.Controllers
 
         [HttpGet("{id}")]
 
-        public PersonaDatos getPersonaDatos(int id) => Repository.persona.FirstOrDefault(p => p.id == id);
+        //public PersonaDatos getPersonaDatos(int id) => Repository.persona.FirstOrDefault(p => p.id == id);
+
+        //[HttpGet("{id}")]
+
+        public ActionResult<PersonaDatos> Get(int id)
+        {
+            var persona = Repository.persona.FirstOrDefault(p =>p.id == id);
+            if (persona == null)
+            {
+                return NotFound();
+            }
+            return Ok(persona);
+        }
 
 
         [HttpGet("search/{search}")]
